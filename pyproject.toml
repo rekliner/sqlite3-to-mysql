@@ -47,6 +47,7 @@ dependencies = [
     "mysql-connector-python>=8.0.18,<8.0.24 ; python_version<'3.6'",
     "mysql-connector-python>=8.0.18,<8.0.30 ; python_version>='3.6'",
     "pytimeparse>=1.1.8",
+    "pytz>=2023.3",
     "six>=1.12.0",
     "simplejson>=3.16.0",
     "tqdm>=4.35.0",

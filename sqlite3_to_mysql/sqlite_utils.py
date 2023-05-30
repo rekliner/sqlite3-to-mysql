@@ -2,7 +2,7 @@
 
 from __future__ import division
 
-from datetime import date, datetime, timedelta, timezone
+from datetime import date, datetime, timedelta
 from decimal import Decimal
 from sys import version_info
 
@@ -10,6 +10,7 @@ import six
 from pytimeparse.timeparse import timeparse
 from unidecode import unidecode
 from packaging import version
+import pytz as timezone
 
 if version_info.major == 3 and 4 <= version_info.minor <= 6:
     from backports.datetime_fromisoformat import MonkeyPatch  # pylint: disable=E0401
@@ -67,6 +68,7 @@ def convert_date(value):
             "DATE field contains Invalid isoformat string: {}".format(err)
         )
 
+
 def check_sqlite_table_xinfo_support(version_string):
     """Check for SQLite table_xinfo support."""
     sqlite_version = version.parse(version_string)
@@ -76,9 +78,10 @@ def check_sqlite_table_xinfo_support(version_string):
         return True
     return False
 
+
 def convert_epoch(value):
-  """Convert unix epoch time to datetime."""
-  _intval = int(value)
-  if _intval >= pow(2,31):  #convert 64 bit epoch date to 32 bit
-      return datetime.fromtimestamp(int(_intval / 1000), timezone.utc)
-  return datetime.fromtimestamp(_intval, timezone.utc)
+    """Convert unix epoch time to datetime."""
+    _intval = int(value)
+    if _intval >= pow(2, 31):  # convert 64 bit epoch date to 32 bit
+        return datetime.fromtimestamp(int(_intval / 1000), timezone.utc)
+    return datetime.fromtimestamp(_intval, timezone.utc)
